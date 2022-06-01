@@ -5,11 +5,13 @@ import NavBar from "../../components/NavBar/NavBar";
 import "../IdeasList/IdeasList.css";
 export default function IdeasList() {
   const [currList, setCurrList] = useState([]);
-  const [message, setMessage] = useState(
-    "No ideas have been proposed yet. Check back later!"
-  );
 
   const ideasList = JSON.parse(localStorage.getItem("ideas")) || [];
+  // let ideasList = React.useMemo(() => {
+  //   return JSON.parse(localStorage.getItem("ideas")) || [];
+  // }, []);
+
+  console.log(ideasList);
 
   const getList = useCallback(() => {
     setCurrList(ideasList);
@@ -54,7 +56,9 @@ export default function IdeasList() {
           </button>
         </div>
       ))}
-      {currList.length === 0 && <MessageDisplay error={message} />}
+      {currList.length === 0 && (
+        <MessageDisplay error='No ideas have been proposed yet. Check back later!' />
+      )}
     </div>
   );
 }
